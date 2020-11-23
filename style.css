@@ -1,0 +1,97 @@
+#wrapper {
+    margin: auto;
+    width: 50%;
+    margin-top: 5em;
+    border: 5px solid black;
+    display: grid;
+    grid-gap: 1px;
+}
+
+#display {
+    text-align: right;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+    width: 98%;
+}
+
+#current {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 5px 0 5px 0;
+}
+
+#calcs {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 5px 0 5px 0;
+}
+
+#formatbtns {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-template-rows: 3em;
+    grid-template-columns: 3em 3em 3em 3em;
+}
+
+#clear {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 1;
+}
+
+#numberwrapper {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 5em 5em 5em 5em;
+}
+
+#one #two #three {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+}
+
+#four #five #six {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 2;
+}
+
+#seven #eight #nine {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 3;
+}
+
+#zero {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row: 4;
+}
+
+#opswrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+#addition #subtraction {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 1;
+}
+
+#multiplication #division {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 2
+}
+
+#equal {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 3
+}
