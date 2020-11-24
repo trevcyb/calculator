@@ -5,7 +5,7 @@ let upperDispNum = "";
 let operation = "";
 let opsymbol = "";
 let answer = 0;
-let calculated;
+let calculated = false;
 const nums = document.querySelectorAll(".number");
 const ops = document.querySelectorAll(".ops");
 let currentdisp = document.getElementById("current");
@@ -28,7 +28,13 @@ function multiplication(firstNum, secondNum) {
 }
 
 function division(firstNum, secondNum) {
-    return(firstNum / secondNum);
+    if (secondNum != 0) {
+        return(firstNum / secondNum);
+    } else {
+        alert("Nice try funny guy!");
+        clearAll();
+        return("Cannot divide by 0");
+    }
 }
 
 function operate(firstNum, operation, secondNum) {
@@ -37,22 +43,41 @@ function operate(firstNum, operation, secondNum) {
         case "addition":
             calcsdisp.innerHTML = firstNum + " " + "+" + " " + secondNum + " " + "=";
             answer = addition(firstNum, secondNum)
-            currentdisp.innerHTML = answer;
+            if (answer.toString().length > 21) {
+                alert("Answer too long!");
+                clearAll();
+            } else {
+                currentdisp.innerHTML = answer;
+            }
             break;
         case "subtraction":
             calcsdisp.innerHTML = firstNum + " " + "-" + " " + secondNum + " " + "=";
             answer = subtraction(firstNum, secondNum)
-            currentdisp.innerHTML = answer;
+            if (answer.toString().length > 21) {
+                clearAll();
+                alert("Answer too long!");
+            } else {
+                currentdisp.innerHTML = answer;
+            }
             break;
         case "multiplication":
             calcsdisp.innerHTML = firstNum + " " + "x" + " " + secondNum + " " + "=";
             answer = multiplication(firstNum, secondNum);
-            currentdisp.innerHTML = answer;
+            if (answer.toString().length > 21) {
+                clearAll();
+            } else {
+                currentdisp.innerHTML = answer;
+            }
             break;
         case "division":
             calcsdisp.innerHTML = firstNum + " " + "/" + " " + secondNum + " " + "=";
             answer = division(firstNum, secondNum);
-            currentdisp.innerHTML = answer;
+            if (answer.toString().length > 21) {
+                clearAll();
+                alert("Answer too long!");
+            } else {
+                currentdisp.innerHTML = answer;
+            }
             break;
     }
 }
@@ -61,43 +86,33 @@ function displayNum() {
     if (dispNum === "") {
         dispNum = this.getAttribute("data-number");
         currentdisp.innerHTML = dispNum;
-    } else {
+    } else if (dispNum.length < 21) {
         dispNum += this.getAttribute("data-number");
         currentdisp.innerHTML = dispNum;
+    } else if (dispNum.length > 21) {
+        alert("Current number too long for operation!");
+        clearAll();
     }
 }
 
-function setNum () {
-    if (calculated === false) {
-        if (answer === 0 && upperDispNum === "" && firstNum === 0) {
-            firstNum = parseInt(dispNum, 10);
-            upperDispNum = dispNum + " " + opsymbol;
-        } else if (answer === 0 && upperDispNum != "" && firstNum != 0) {
-            secondNum = parseInt(dispNum, 10);
-        }
+function work() {
+    if (upperDispNum === "") {
+        firstNum = parseInt(dispNum, 10);
+        upperDispNum = firstNum + " " + opsymbol;
     } else if (calculated === true) {
-        if (answer === 0 && upperDispNum != "" && firstNum != 0) {
-            upperDispNum = answer + " " + opsymbol;
-            secondNum = parseInt(dispNum, 10);
-        } else if (answer != 0 && upperDispNum != "" && firstNum != 0) {
-            firstNum = answer;
-            upperDispNum = answer + " " + opsymbol;
-            secondNum = parseInt(dispNum, 10);
-        } else if (answer === 0 && upperDispNum != "" && firstNum === 0) {
-            upperDispNum = answer + " " + opsymbol;
-            secondNum = parseInt(dispNum, 10);
-        } else if (answer != 0 && upperDispNum != "" && firstNum === 0) {
-            upperDispNum = answer + " " + opsymbol;
-            secondNum = parseInt(dispNum, 10);
-        }
+        firstNum = answer;
+        upperDispNum = firstNum + " " + opsymbol;
+        secondNum = parseInt(dispNum, 10);
+    } else if (calculated === false) {
+        secondNum = parseInt(dispNum, 10);
     }
 }
+
 
 function setOp() {
- 
     operation = this.id;
     opsymbol = this.getAttribute("data-sym");
-    setNum();
+    work();
     calcsdisp.innerHTML = upperDispNum;
     currentdisp.innerHTML = "";
     dispNum = "";
@@ -128,6 +143,12 @@ ops.forEach(op => op.addEventListener("click", setOp));
 clear.addEventListener("click", clearDiv);
 allclear.addEventListener("click", clearAll);
 equal.addEventListener("click", () => {
-    setNum();
-    operate(firstNum, operation, secondNum);
+    work();
+    if (operation != "") {
+        operate(firstNum, operation, secondNum);
+    } else {
+        alert("Don't be that guy!");
+        clearAll();
+    }
+
 });
