@@ -2,12 +2,14 @@
 <html>
     <head>
         <title>
-            Calculator App
+            My Calculator App
         </title>
         <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     </head>
     <header>
-        Calculator App
+       My Calculator App
     </header>
     <body>
         <div id="wrapper">
@@ -16,8 +18,8 @@
                 <div id="current"></div>
             </div>
             <div id="formatbtns">
-                <button id="allclear">AC</button>
-                <button id="clear">C</button>
+                <button id="allclear" class="formatbtn">AC</button>
+                <button id="clear" class="formatbtn">C</button>
             </div>
             <div id="numberwrapper">
                 <button id="one" class="number" data-number="1">1</button>
@@ -39,6 +41,9 @@
                 <button id="equal" class="equal">=</button>
             </div>
 
+        </div>
+        <div>
+            <p>This was done for The Odin Project.</p>
         </div>
     </body>
     <script src="calculator.js"></script>
